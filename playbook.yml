@@ -1,0 +1,28 @@
+---
+- name: My first Ansible playbook
+  hosts: local
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install curl
+      apt:
+        name: curl
+        state: present
+
+    - name: Create a directory
+      file:
+        path: /tmp/ansible-test
+        state: directory
+
+    - name: Create a file with content
+      copy:
+        content: "This file was created by Ansible"
+        dest: /tmp/ansible-test/hello.txt
+
+    - name: Print a message
+      debug:
+        msg: "Ansible playbook completed successfully!"
